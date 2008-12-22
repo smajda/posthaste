@@ -1,0 +1,21 @@
+/* 
+ * posthasteForm stylesheet
+ */
+div#posthasteForm {
+    width: 100%;
+    height: 100%;
+    margin: 1em 0;
+    padding: 10px;
+}
+div#posthasteForm #posthasteIntro {padding: 1em 0; margin: 0 0 0.5em;}
+div#posthasteForm #posthasteIntro b {font-size: 1.3em; margin-right: 7px;}
+
+div#posthasteForm input#postTitle {display: block; width: 90%;}
+
+div#posthasteForm textarea {display: block;}
+div#posthasteForm textarea#postText {width: 91%; height: 8em;}
+
+div#posthasteForm label {display: block;}
+div#posthasteForm label#tags {display: inline;}
+div#posthasteForm label#cats {padding-left: 5px; display: inline;}
+div#posthasteForm input#submit {margin-left: 15px; }
