@@ -3,7 +3,7 @@ Contributors: smajda
 Tags: prologue, post
 Requires at least: 2.6
 Tested up to: 2.7
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Adds the post box from the Prologue theme (modified to include a Title field and Category dropbox) to any theme.
 
@@ -53,3 +53,9 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 
 1. This is what the form looks like on a simple theme with a white background without any fancy CSS styling on the forms. 
 2. Here's the form on the default K2 theme. 
+
+== Release Notes ==
+
+**1.0.1** : Filters HTML out of title field. Just a one-line change. For blogs with a small, private groups of trusted authors who don't care about this, feel free to skip this update.
+
+**1.0** : First release.

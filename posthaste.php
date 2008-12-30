@@ -3,7 +3,7 @@
 Plugin Name: Posthaste
 Plugin URI: http://jon.smajda.com/blog/2008/09/01/posthaste-wp-plugin/
 Description: Adds the post box from the Prologue theme (modified to include a Title field and Category dropbox) to any theme.
-Version: 1.0
+Version: 1.0.1
 Author: Jon Smajda
 Author URI: http://jon.smajda.com
 License: GPL
@@ -68,7 +68,7 @@ function posthasteHeader() {
 
         $user_id       = $current_user->user_id;
         $post_content  = $_POST['postText'];
-        $post_title    = $_POST['postTitle'];
+        $post_title    = strip_tags($_POST['postTitle']);
         $tags          = $_POST['tags'];
 		$post_category = $_POST['newcat_parent'];
 
