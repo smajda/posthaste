@@ -1,11 +1,11 @@
 === Posthaste ===
 Contributors: smajda
 Tags: prologue, post
-Requires at least: 2.6
+Requires at least: 2.7
 Tested up to: 2.7
-Stable tag: 1.0.1
+Stable tag: 1.1
 
-Adds the post box from the Prologue theme (modified to include a Title field and Category dropbox) to any theme.
+Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a  Save as Draft option) to any theme.
 
 == Description ==
 
@@ -15,11 +15,12 @@ This plugin reuses much code from the [Prologue](http://wordpress.org/extend/the
 
 A few notes about the plugin's behavior: 
 
-* Your theme needs to use `wp_head()` for this to work. Unless you're using a very old theme, it probably does.
+* In WordPress 2.7, you can select which fields you want to appear in the form. Settings are in "Settings -> Writing -> Posthaste Settings". (If you're using an older version of WordPress, the plugin should still work but all fields will be shown without access to settings.)
 * If you leave the "Title:" field blank, it takes the first 40 characters of the post content and makes that the title.
 * If you leave the "Category:" box at its default setting ("Category...") it posts to your default category. _However..._
 * If you have a category named 'asides', it will put posts with empty titles into the 'asides' category even if you do not explicitly specify the 'asides' category in the dropdown. You can then [style them as asides](http://codex.wordpress.org/Adding_Asides).
 * The included CSS is deliberately simple. If your theme already styles forms, it will probably inherit your theme's styling. If you want to customize the appearance of the form, just customize your own css files.
+* Your theme needs to use `wp_head()` for this to work. Unless you're using a very old theme, it probably does.
 
 == Installation ==
 
@@ -53,8 +54,11 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 
 1. This is what the form looks like on a simple theme with a white background without any fancy CSS styling on the forms. 
 2. Here's the form on the default K2 theme. 
+3. Choose which fields to show. In Settings -> Writing (2.7 only).
 
 == Release Notes ==
+
+**1.1** : You can now choose which fields you want to show up under Settings -> Writing -> Posthaste Settings (WP 2.7 only). Also adds a checkbox to save your post as a Draft. 
 
 **1.0.1** : Filters HTML out of title field. Just a one-line change. For blogs with a small, private groups of trusted authors who don't care about this, feel free to skip this update.
 
