@@ -25,3 +25,27 @@ div#posthasteForm input#postStatus {margin-left: 5px;}
 div#posthasteForm input#submit {margin-left: 15px; }
 
 div#posthasteDraftNotice {font-weight: bold; text-align: center; padding: 5px;}
+
+.ac_results {
+    margin: -1px 0 0;
+    list-style: none;
+    position: absolute;
+    z-index: 10000;
+    display: none;
+    border: 1px solid #ccc;    
+    font-size: 1.2em;    
+    background: rgba(255, 255, 255, 0.95);
+}
+.ac_results li {
+    padding: 4px 8px;
+    white-space: nowrap;
+    text-align: left;
+}
+.ac_over {
+    cursor: pointer;    
+    color: #fff;
+    background: #3478e3;
+}
+.ac_match {    
+    text-decoration: underline;
+}
