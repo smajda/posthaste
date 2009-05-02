@@ -147,9 +147,8 @@ function posthasteForm() {
             <?php wp_nonce_field( 'new-post' ); ?>
             
             <div id="posthasteIntro">
-            <?php if (function_exists('get_avatar')) {
-                    echo get_avatar($id_or_email, 32); 
-                   } ?>
+            <?php if ($options['gravatar'] == "on" && function_exists('get_avatar') ) {
+                    echo get_avatar(get_the_author_id(), 40); } ?>
             <b>Hello, <?php echo $nickname; ?>!</b> <a href="<?php bloginfo('wpurl');  ?>/wp-admin/post-new.php" title="Go to the full WordPress editor">Write a new post</a>, <a href="<?php bloginfo('wpurl');  ?>/wp-admin/" title="Manage the blog">Manage the blog</a>, or <?php wp_loginout(); ?>.
             </div>
 
@@ -333,7 +332,7 @@ if ($wp_version >= '2.7') {
     function posthasteFieldsCallback() {
 
         // fields you want in the form
-        $fields = array('title', 'tags', 'categories','draft'); 
+        $fields = array('title', 'tags', 'categories','draft','gravatar'); 
 
         // get options (if empty, fill in defaults & then get options)
         if(!$options = get_option('posthaste_fields')) { 

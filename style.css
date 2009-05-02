@@ -7,7 +7,8 @@ div#posthasteForm {
     margin: 1em 0;
     padding: 10px;
 }
-div#posthasteForm #posthasteIntro {padding: 1em 0; margin: 0 0 0.5em;}
+div#posthasteForm #posthasteIntro {padding: 1em 0; margin: 0 0 0.5em; overflow: hidden;}
+div#posthasteForm #posthasteIntro img.avatar {margin: 0; padding: 0 8px 0 0;}
 div#posthasteForm #posthasteIntro b {font-size: 1.3em; margin-right: 7px;}
 
 div#posthasteForm input#postTitle {display: block; width: 90%;}
@@ -27,24 +28,26 @@ div#posthasteForm input#submit {margin-left: 15px; }
 div#posthasteDraftNotice {font-weight: bold; text-align: center; padding: 5px;}
 
 .ac_results {
-    margin: -1px 0 0;
+    margin: 0;
+    padding: 0;
     list-style: none;
     position: absolute;
     z-index: 10000;
     display: none;
     border: 1px solid #ccc;    
-    font-size: 1.2em;    
-    background: rgba(255, 255, 255, 0.95);
+    font-size: 1.1em;    
+    background: #fff;
 }
 .ac_results li {
-    padding: 4px 8px;
+    margin: 0;
+    padding: 2px 4px;
     white-space: nowrap;
     text-align: left;
 }
 .ac_over {
     cursor: pointer;    
     color: #fff;
-    background: #3478e3;
+    background: #777;
 }
 .ac_match {    
     text-decoration: underline;
