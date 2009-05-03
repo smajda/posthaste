@@ -3,7 +3,7 @@ Contributors: smajda
 Tags: prologue, post
 Requires at least: 2.7
 Tested up to: 2.7
-Stable tag: 1.1
+Stable tag: 1.2
 
 Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a  Save as Draft option) to any theme.
 
@@ -58,7 +58,7 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 
 == Release Notes ==
 
-**1.2** : Added auto-suggest feature to Tags field and optional avatar display. To style tag suggestions, see the "ac_" entries in style.css
+**1.2** : Added auto-suggest feature to Tags field and optional avatar display. 
 
 **1.1** : You can now choose which fields you want to show up under Settings -> Writing -> Posthaste Settings (WP 2.7 only). Also adds a checkbox to save your post as a Draft. 
 
