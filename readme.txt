@@ -58,6 +58,8 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 
 == Release Notes ==
 
+**1.2** : Added auto-suggest feature to Tags field and optional avatar display. To style tag suggestions, see the "ac_" entries in style.css
+
 **1.1** : You can now choose which fields you want to show up under Settings -> Writing -> Posthaste Settings (WP 2.7 only). Also adds a checkbox to save your post as a Draft. 
 
 **1.0.1** : Filters HTML out of title field. Just a one-line change. For blogs with a small, private groups of trusted authors who don't care about this, feel free to skip this update.
