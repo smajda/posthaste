@@ -3,7 +3,7 @@
 Plugin Name: Posthaste
 Plugin URI: http://jon.smajda.com/blog/2008/09/01/posthaste-wp-plugin/
 Description: Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a Save as Draft option) to any theme.
-Version: 1.1
+Version: 1.2
 Author: Jon Smajda
 Author URI: http://jon.smajda.com
 License: GPL
@@ -12,10 +12,11 @@ License: GPL
 /*
  * Copyright 2009 Jon Smajda (email: jon@smajda.com)
  *
- * This plugin reuses code from the Prologue Theme,
- * Copyright Joseph Scott and Matt Thomas of Automattic,
- * http://wordpress.org/extend/themes/prologue/
+ * This plugin reuses code from the Prologue and P2 Themes,
+ * Copyright Joseph Scott, Matt Thomas, Noel Jackson, and Automattic
  * according to the terms of the GNU General Public License.
+ * http://wordpress.org/extend/themes/prologue/
+ * http://wordpress.org/extend/themes/p2/
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -146,6 +147,9 @@ function posthasteForm() {
             <?php wp_nonce_field( 'new-post' ); ?>
             
             <div id="posthasteIntro">
+
+            <?php if ($options['gravatar'] == "on" && function_exists('get_avatar') ) {
+                    echo get_avatar(get_the_author_id(), 40); } ?>
             <b>Hello, <?php echo $nickname; ?>!</b> <a href="<?php bloginfo('wpurl');  ?>/wp-admin/post-new.php" title="Go to the full WordPress editor">Write a new post</a>, <a href="<?php bloginfo('wpurl');  ?>/wp-admin/" title="Manage the blog">Manage the blog</a>, or <?php wp_loginout(); ?>.
             </div>
 
@@ -159,7 +163,10 @@ function posthasteForm() {
 
             <?php if ($options['tags'] == "on") { ?>
             <label for="tags" id="tagsLabel">Tag:</label>
-            <input type="text" name="tags" id="tags" tabindex="3"  autocomplete="off" />
+            <input type="text" name="tags" 
+                   id="tags" tabindex="3"  
+                   autocomplete="off"
+            />
             <?php } ?>
             
             <?php if ($options['categories'] == "on") { ?>
@@ -214,6 +221,49 @@ function addPosthasteStylesheet() {
 	if( current_user_can('publish_posts')) {
 		echo "\n".'<link rel="stylesheet" type="text/css" media="screen" href="'.$pluginStyleURL.'">'."\n";
 	}
+}
+
+
+// add posthaste.js and dependencies
+function addPosthasteJs() {
+	if( current_user_can('publish_posts') && !is_admin() ) {
+        wp_enqueue_script(
+            'posthaste',  // script name
+            WP_PLUGIN_URL.'/'.basename(dirname(__FILE__)).'/posthaste.js', // url
+            array('jquery', 'suggest')  // dependencies
+        );
+    }
+}
+
+// Blatant copying from p2 here
+function posthaste_ajax_tag_search() {
+    global $wpdb;
+    $s = $_GET['q'];
+    if ( false !== strpos( $s, ',' ) ) {
+        $s = explode( ',', $s );
+        $s = $s[count( $s ) - 1];
+    }
+    $s = trim( $s );
+    if ( strlen( $s ) < 2 )
+        die; // require 2 chars for matching
+
+    $results = $wpdb->get_col( "SELECT t.name 
+        FROM $wpdb->term_taxonomy 
+        AS tt INNER JOIN $wpdb->terms 
+        AS t ON tt.term_id = t.term_id 
+        WHERE tt.taxonomy = 'post_tag' AND t.name 
+        LIKE ('%". like_escape( $wpdb->escape( $s )  ) . "%')" );
+    echo join( $results, "\n" );
+    exit;
+}
+
+// pass wpurl from php to js
+function posthaste_jsvars() {
+    ?><script type='text/javascript'>
+    // <![CDATA[
+    var ajaxUrl = "<?php echo js_escape( get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php' ); ?>";
+    //]]>
+    </script><?php
 }
 
 
@@ -283,7 +333,7 @@ if ($wp_version >= '2.7') {
     function posthasteFieldsCallback() {
 
         // fields you want in the form
-        $fields = array('title', 'tags', 'categories','draft'); 
+        $fields = array('title', 'tags', 'categories','draft','gravatar'); 
 
         // get options (if empty, fill in defaults & then get options)
         if(!$options = get_option('posthaste_fields')) { 
@@ -326,5 +376,11 @@ add_action('loop_start', posthasteForm);
 add_action('get_sidebar', removePosthasteInSidebar);
 // add the css
 add_action('wp_head', addPosthasteStylesheet);
+// add js
+add_action('init', addPosthasteJs);
+// tell wp-admin.php about ajax tags function with wp_ajax_ action
+add_action('wp_ajax_posthaste_ajax_tag_search', 'posthaste_ajax_tag_search');
+// load php vars for js
+add_action('wp_head', 'posthaste_jsvars');
 // add options to "Writing" admin page in 2.7 and up
 if ($wp_version >= '2.7') { add_action('admin_init', posthasteSettingsInit); }
