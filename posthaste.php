@@ -149,7 +149,8 @@ function posthasteForm() {
             <div id="posthasteIntro">
 
             <?php if ($options['gravatar'] == "on" && function_exists('get_avatar') ) {
-                    echo get_avatar(get_the_author_id(), 40); } ?>
+                    global $current_user;
+                    echo get_avatar($current_user->ID, 40); } ?>
             <b>Hello, <?php echo $nickname; ?>!</b> <a href="<?php bloginfo('wpurl');  ?>/wp-admin/post-new.php" title="Go to the full WordPress editor">Write a new post</a>, <a href="<?php bloginfo('wpurl');  ?>/wp-admin/" title="Manage the blog">Manage the blog</a>, or <?php wp_loginout(); ?>.
             </div>
 
