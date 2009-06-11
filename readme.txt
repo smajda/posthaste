@@ -2,8 +2,8 @@
 Contributors: smajda
 Tags: prologue, post
 Requires at least: 2.7
-Tested up to: 2.7
-Stable tag: 1.2
+Tested up to: 2.8
+Stable tag: 1.2.1
 
 Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a  Save as Draft option) to any theme.
 
@@ -57,6 +57,8 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 3. Choose which fields to show. In Settings -> Writing (2.7 only).
 
 == Release Notes ==
+
+**1.2.1** : Fixed gravatars for 2.8 (get_the_author_id() deprecated)
 
 **1.2** : Added auto-suggest feature to Tags field and optional avatar display. 
 
