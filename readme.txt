@@ -56,14 +56,21 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 2. Here's the form on the default K2 theme. 
 3. Choose which fields to show. In Settings -> Writing (2.7 only).
 
-== Release Notes ==
+== Changelog ==
 
-**1.2.1** : Fixed gravatars for 2.8 (get_the_author_id() deprecated)
+= 1.2.1 =
+* Fixed gravatars 
 
-**1.2** : Added auto-suggest feature to Tags field and optional avatar display. 
+= 1.2 = 
+* Added auto-suggest feature to Tags field 
+* Optional avatar display. 
 
-**1.1** : You can now choose which fields you want to show up under Settings -> Writing -> Posthaste Settings (WP 2.7 only). Also adds a checkbox to save your post as a Draft. 
+= 1.1 =
+* You can now choose which fields you want to show up under Settings -> Writing -> Posthaste Settings (WP 2.7 only). 
+* Also adds a checkbox to save your post as a Draft. 
 
-**1.0.1** : Filters HTML out of title field. Just a one-line change. For blogs with a small, private groups of trusted authors who don't care about this, feel free to skip this update.
+= 1.0.1 =
+* Filters HTML out of title field. Just a one-line change. For blogs with a small, private groups of trusted authors who don't care about this, feel free to skip this update.
 
-**1.0** : First release.
+= 1.0 = 
+* First release.
