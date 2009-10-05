@@ -1,5 +1,7 @@
 === Posthaste ===
 Contributors: smajda
+Author URI: http://jon.smajda.com
+Plugin URI: http://wordpress.org/extend/plugins/posthaste/
 Tags: prologue, post
 Requires at least: 2.7
 Tested up to: 2.8
