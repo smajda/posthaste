@@ -179,7 +179,7 @@ function posthasteForm() {
                 'class' => 'catSelection',
                 'heirarchical' => 1,
                 'show_option_none' => __('Category...'),
-                //'selected' => ,  // how to select default cat by default?
+                'selected' => get_option('default_category', 1),
                 'tab_index' => 3
                 )
             ); ?>
