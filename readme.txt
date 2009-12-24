@@ -65,7 +65,6 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 * Category selection works a little different now. By default, the category dropdown selects your default category, unless you're showing the form on a category archive page, in which case it selects the category for that page. If you aren't displaying the category dropdown at all, it will post to your default category *unless* you're posting from a category archive page, then it will post to the category of the category archive page you're on.
 * Tag selection is similar: if you show the form on a tag archive page, that tag is auto-filled in the tag field (if it's visible) or auto-added to a new post from that page (if the tag field is not visible).
 
-
 = 1.2.1 =
 * Fixed gravatars 
 
