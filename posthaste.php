@@ -87,8 +87,6 @@ function posthasteCatCheck() {
 // Which tag to use
 function posthasteTagCheck() {
     if (is_tag()) {
-        //$taxarray = is_term(single_tag_title('', false), 'post_tag');
-        //return tag_name($taxarray['term_id']);
         $taxarray = get_term_by('name', single_tag_title('', false), 'post_tag', ARRAY_A);
         return $taxarray['name'];
     } else {
