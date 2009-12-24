@@ -76,6 +76,14 @@ function posthasteDisplayCheck() {
     return $posthaste_display;
 }
 
+// Which category to use
+function posthasteCatCheck() {
+    if (is_category())
+        return get_cat_ID(single_cat_title('', false));
+    else 
+        return get_option('default_category', 1);
+}
+
 // Add to header
 function posthasteHeader() {
     global $posthasteVariables;
@@ -100,14 +108,7 @@ function posthasteHeader() {
         $post_content  = $_POST['postText'];
         $post_title    = strip_tags($_POST['postTitle']);
         $tags          = $_POST['tags'];
-		$post_category = $_POST['newcat_parent'];
-
-		// if no category was selected, unset it & default will be used
-        if ($post_category == '-1') {
-            unset($post_category);
-        } elseif ( isset($post_category) ) {
-           $post_category = array($post_category);
-        }
+		$post_category = array($_POST['catsdd']);
 
         // set post_status 
         if ($_POST['postStatus'] == 'draft') {
@@ -205,19 +206,25 @@ function posthasteForm() {
             />
             <?php } ?>
             
-            <?php if ($options['categories'] == "on") { ?>
-			<label for="cats" id="cats">Category:</label>
-            <?php wp_dropdown_categories( array(
-                'hide_empty' => 0,
-                'name' => 'newcat_parent',
-                'orderby' => 'name',
-                'class' => 'catSelection',
-                'heirarchical' => 1,
-                'selected' => get_option('default_category', 1),
-                'tab_index' => 3
-                )
-            ); ?>
-            <?php } ?>
+            <?php 
+            if ($options['categories'] == "on") { 
+    			echo '<label for="cats" id="cats">Category:</label> ';
+                $catselect = posthasteCatCheck();
+                wp_dropdown_categories( array(
+                    'hide_empty' => 0,
+                    'name' => 'catsdd',
+                    'orderby' => 'name',
+                    'class' => 'catSelection',
+                    'heirarchical' => 1,
+                    'selected' => $catselect,
+                    'tab_index' => 3
+                    )
+                ); 
+            } else {
+                $catselect = posthasteCatCheck();
+                echo '<input checked="checked" type="hidden" value="'
+                      .$catselect.'" name="catsdd" id="catsdd">';
+            } ?>
 
 
             <?php if ($options['draft'] == "on") { ?>
