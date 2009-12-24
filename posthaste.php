@@ -175,13 +175,19 @@ function posthasteForm() {
             <input type="hidden" name="action" value="post" />
             <?php wp_nonce_field( 'new-post' ); ?>
             
+            <?php if ($options['gravatar'] == "on" || $options['greeting and links'] == "on") { ?>
             <div id="posthasteIntro">
 
             <?php if ($options['gravatar'] == "on" && function_exists('get_avatar') ) {
                     global $current_user;
                     echo get_avatar($current_user->ID, 40); } ?>
+
+            <?php if ($options['greeting and links'] == "on") { ?>
             <b>Hello, <?php echo $nickname; ?>!</b> <a href="<?php bloginfo('wpurl');  ?>/wp-admin/post-new.php" title="Go to the full WordPress editor">Write a new post</a>, <a href="<?php bloginfo('wpurl');  ?>/wp-admin/" title="Manage the blog">Manage the blog</a>, or <?php wp_loginout(); ?>.
+            <?php } ?>
+
             </div>
+            <?php } ?>
 
             <?php if ($options['title'] == "on") { ?>
             <label for="postTitle">Title:</label>
@@ -310,7 +316,7 @@ function posthaste_jsvars() {
 function posthasteAddDefaultFields() {
     
     // fields that are on by default:
-    $fields = array('title', 'tags', 'categories', 'draft'); 
+    $fields = array('title', 'tags', 'categories', 'draft', 'greeting and links'); 
 
     // fill in options array with each field on
     $options = array();
@@ -352,7 +358,7 @@ if ($wp_version >= '2.7') {
         // add fields selection
         add_settings_field(
             'posthaste_fields', 
-            'Posthaste Fields',
+            'Posthaste Elements',
             'posthasteFieldsCallback',
             'writing',
             'posthaste_settings_section'
@@ -371,7 +377,7 @@ if ($wp_version >= '2.7') {
     function posthasteFieldsCallback() {
 
         // fields you want in the form
-        $fields = array('title', 'tags', 'categories','draft','gravatar'); 
+        $fields = array('title', 'tags', 'categories','draft','gravatar', 'greeting and links'); 
 
         // get options (if empty, fill in defaults & then get options)
         if(!$options = get_option('posthaste_fields')) { 

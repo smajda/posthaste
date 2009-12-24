@@ -61,6 +61,7 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 
 = 1.3 =
 * You can now choose where you want the form to appear in Settings > Writing > Posthaste Settings. You can display the form on your Front Page (default), Front Page and all archive pages, all pages or only on the archive pages for a specific category.
+* You can also now choose whether or not to display the "Hello" greeting and admin links.
 * The category dropdown now selects your default category by default instead of showing "Category..." (which, if left alone, posted to your default category anyway).
 
 = 1.2.1 =
