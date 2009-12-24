@@ -109,6 +109,7 @@ function posthasteHeader() {
         $post_title    = strip_tags($_POST['postTitle']);
         $tags          = $_POST['tags'];
 		$post_category = array($_POST['catsdd']);
+        $returnUrl     = $_POST['posthasteUrl'];
 
         // set post_status 
         if ($_POST['postStatus'] == 'draft') {
@@ -148,7 +149,7 @@ function posthasteHeader() {
         } else { 
             $postresult = ''; 
         }
-        wp_redirect( get_bloginfo( 'url' ) . '/' . $postresult );
+        wp_redirect( $returnUrl . $postresult );
         exit;
     }
 }
@@ -172,7 +173,7 @@ function posthasteForm() {
         global $current_user;
         $user = get_userdata($current_user->ID);
         $nickname = attribute_escape($user->nickname);
-        ?><form id="new-post" name="new-post" method="post" action="<?php bloginfo('url'); ?>/">
+        ?><form id="new-post" name="new-post" method="post" action="">
             <input type="hidden" name="action" value="post" />
             <?php wp_nonce_field( 'new-post' ); ?>
             
@@ -230,6 +231,7 @@ function posthasteForm() {
             <?php if ($options['draft'] == "on") { ?>
             <input type="checkbox" name="postStatus" value="draft" id="postStatus">
             <label for="postStatus" id="postStatusLabel">Draft</label>
+            <input checked="checked" type="hidden" value="<?php echo $_SERVER['REQUEST_URI']; ?>" name="posthasteUrl" >
             <?php } ?>
 
             <input id="submit" type="submit" value="Post it" />
