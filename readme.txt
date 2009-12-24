@@ -62,7 +62,9 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 = 1.3 =
 * You can now choose where you want the form to appear in Settings > Writing > Posthaste Settings. You can display the form on your Front Page (default), Front Page and all archive pages, all pages or only on the archive pages for a specific category.
 * You can also now choose whether or not to display the "Hello" greeting and admin links.
-* The category dropdown now selects your default category by default instead of showing "Category..." (which, if left alone, posted to your default category anyway).
+* Category selection works a little different now. By default, the category dropdown selects your default category, unless you're showing the form on a category archive page, in which case it selects the category for that page. If you aren't displaying the category dropdown at all, it will post to your default category *unless* you're posting from a category archive page, then it will post to the category of the category archive page you're on.
+* Tag selection is similar: if you show the form on a tag archive page, that tag is auto-filled in the tag field (if it's visible) or auto-added to a new post from that page (if the tag field is not visible).
+
 
 = 1.2.1 =
 * Fixed gravatars 

@@ -84,6 +84,19 @@ function posthasteCatCheck() {
         return get_option('default_category', 1);
 }
 
+// Which tag to use
+function posthasteTagCheck() {
+    if (is_tag()) {
+        //$taxarray = is_term(single_tag_title('', false), 'post_tag');
+        //return tag_name($taxarray['term_id']);
+        $taxarray = get_term_by('name', single_tag_title('', false), 'post_tag', ARRAY_A);
+        return $taxarray['name'];
+    } else {
+        return NULL;
+    }
+}
+
+
 // Add to header
 function posthasteHeader() {
     global $posthasteVariables;
@@ -203,9 +216,14 @@ function posthasteForm() {
             <label for="tags" id="tagsLabel">Tag:</label>
             <input type="text" name="tags" 
                    id="tags" tabindex="3"  
+                   value="<?php echo posthasteTagCheck(); ?>"
                    autocomplete="off"
             />
-            <?php } ?>
+            <?php } else {
+                $tagselect = posthasteTagCheck();
+                echo '<input checked="checked" type="hidden" value="'
+                      .$tagselect.'" name="tags" id="tags">';
+            } ?>
             
             <?php 
             if ($options['categories'] == "on") { 
