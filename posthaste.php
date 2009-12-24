@@ -3,7 +3,7 @@
 Plugin Name: Posthaste
 Plugin URI: http://jon.smajda.com/blog/2008/09/01/posthaste-wp-plugin/
 Description: Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a Save as Draft option) to any theme.
-Version: 1.2
+Version: 1.3
 Author: Jon Smajda
 Author URI: http://jon.smajda.com
 License: GPL
