@@ -47,13 +47,42 @@ $posthasteVariables = array(
  * FUNCTIONS 
  ************/
 
+// When to display form
+function posthasteDisplayCheck() {
+    if(!$display = get_option('posthaste_display'))
+        $display = 'front';
+
+    switch ($display) {
+        case 'front':
+            if (is_home())
+                $posthaste_display = true;
+            break;
+        case 'archive':
+            if (is_archive() || is_home())
+                $posthaste_display = true;
+            break;
+        case 'everywhere':
+            if (!is_admin())
+                $posthaste_display = true;
+            break;
+        case ((int)$display != 0):
+            if (is_category($display))
+                $posthaste_display = true;
+            break;
+        default:
+            $posthaste_display = false;
+    }
+
+    return $posthaste_display;
+}
+
 // Add to header
 function posthasteHeader() {
     global $posthasteVariables;
     if('POST' == $_SERVER['REQUEST_METHOD']
         && !empty( $_POST['action'])
         && $_POST['action'] == 'post'
-        && is_home()) { // !is_admin() will get it on all pages
+        && posthasteDisplayCheck() ) { // !is_admin() will get it on all pages
 
         if (!is_user_logged_in()) {
             wp_redirect( get_bloginfo( 'url' ) . '/' );
@@ -130,8 +159,8 @@ function posthasteForm() {
         posthasteAddDefaultFields(); 
         $options = get_option('posthaste_fields');
     } 
-
-    if(current_user_can('publish_posts') && is_home() ) { // !is_admin() will get it on all pages
+    
+    if(current_user_can('publish_posts') && posthasteDisplayCheck() ) { 
         echo "\n\t".'<div id="posthasteForm">'."\n\t";
         if (isset($_GET['posthastedraft'])) { 
             echo '<div id="posthasteDraftNotice">'
@@ -178,7 +207,6 @@ function posthasteForm() {
                 'orderby' => 'name',
                 'class' => 'catSelection',
                 'heirarchical' => 1,
-                'show_option_none' => __('Category...'),
                 'selected' => get_option('default_category', 1),
                 'tab_index' => 3
                 )
@@ -311,7 +339,17 @@ if ($wp_version >= '2.7') {
             'writing'
         );
 
-        // add the fields
+        // add 'display on' option
+        add_settings_field(
+            'posthaste_display', 
+            'Display Posthaste on...',
+            'posthasteDisplayCallback',
+            'writing',
+            'posthaste_settings_section'
+        );
+        register_setting('writing','posthaste_display');
+
+        // add fields selection
         add_settings_field(
             'posthaste_fields', 
             'Posthaste Fields',
@@ -319,7 +357,6 @@ if ($wp_version >= '2.7') {
             'writing',
             'posthaste_settings_section'
         );
-
         register_setting('writing','posthaste_fields');
     }
 
@@ -361,6 +398,44 @@ if ($wp_version >= '2.7') {
                  .'name="posthaste_fields[hidden]" id="posthaste_fields[hidden]">';
             echo "</fieldset>";
         }
+    }
+
+    function posthasteDisplayCallback() {
+        // get current values
+        if(!$select = get_option('posthaste_display'))
+            $select = 'front';
+
+        $options = array(
+                'front' => 'Front Page', 
+                'archive' => 'Front and Archive Pages',
+                'everywhere' => 'Everwhere',
+                'catheader' => 'Single Category Page:'
+            );
+
+        $cats = get_categories(array(
+                    'hide_empty' => 0,
+                    'hierarchical' => 0
+                ));
+
+        foreach($cats as $cat){
+            $options[$cat->cat_ID] = $cat->cat_name;
+        }
+
+
+        // build the dropdown menu
+        echo '<select name="posthaste_display" id="posthaste_display">';
+
+        foreach($options as $key=>$value) {
+            if ($select == $key)
+                $selected = ' selected="selected"';
+            if ($key == 'catheader')
+                $disabled = ' disabled="disabled"';
+            echo "<option value=\"$key\"$selected$disabled>$value</option>\n";
+            unset($selected,$disabled);
+        }   
+
+        echo '</select>';
+
     }
 }
 

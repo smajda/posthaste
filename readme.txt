@@ -4,8 +4,8 @@ Author URI: http://jon.smajda.com
 Plugin URI: http://wordpress.org/extend/plugins/posthaste/
 Tags: prologue, post
 Requires at least: 2.7
-Tested up to: 2.8
-Stable tag: 1.2.1
+Tested up to: 2.9
+Stable tag: 1.3
 
 Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a  Save as Draft option) to any theme.
 
@@ -17,12 +17,11 @@ This plugin reuses much code from the [Prologue](http://wordpress.org/extend/the
 
 A few notes about the plugin's behavior: 
 
-* In WordPress 2.7, you can select which fields you want to appear in the form. Settings are in "Settings -> Writing -> Posthaste Settings". (If you're using an older version of WordPress, the plugin should still work but all fields will be shown without access to settings.)
+* In WordPress 2.7 and higher, you can select which fields you want to appear in the form and what pages you want the form to appear on. Settings are in "Settings -> Writing -> Posthaste Settings".
 * If you leave the "Title:" field blank, it takes the first 40 characters of the post content and makes that the title.
 * If you leave the "Category:" box at its default setting ("Category...") it posts to your default category. _However..._
 * If you have a category named 'asides', it will put posts with empty titles into the 'asides' category even if you do not explicitly specify the 'asides' category in the dropdown. You can then [style them as asides](http://codex.wordpress.org/Adding_Asides).
 * The included CSS is deliberately simple. If your theme already styles forms, it will probably inherit your theme's styling. If you want to customize the appearance of the form, just customize your own css files.
-* Your theme needs to use `wp_head()` for this to work. Unless you're using a very old theme, it probably does.
 
 == Installation ==
 
@@ -59,6 +58,10 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 3. Choose which fields to show. In Settings -> Writing (2.7 only).
 
 == Changelog ==
+
+= 1.3 =
+* You can now choose where you want the form to appear in Settings > Writing > Posthaste Settings. You can display the form on your Front Page (default), Front Page and all archive pages, all pages or only on the archive pages for a specific category.
+* The category dropdown now selects your default category by default instead of showing "Category..." (which, if left alone, posted to your default category anyway).
 
 = 1.2.1 =
 * Fixed gravatars 
