@@ -3,7 +3,7 @@
 Plugin Name: Posthaste
 Plugin URI: http://wordpress.org/extend/plugins/posthaste/
 Description: Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a Save as Draft option) to any theme.
-Version: 1.3
+Version: 1.3.1
 Author: Jon Smajda
 Author URI: http://jon.smajda.com
 License: GPL
@@ -247,8 +247,8 @@ function posthasteForm() {
             <?php if ($options['draft'] == "on") { ?>
             <input type="checkbox" name="postStatus" value="draft" id="postStatus">
             <label for="postStatus" id="postStatusLabel">Draft</label>
-            <input checked="checked" type="hidden" value="<?php echo $_SERVER['REQUEST_URI']; ?>" name="posthasteUrl" >
             <?php } ?>
+            <input checked="checked" type="hidden" value="<?php echo $_SERVER['REQUEST_URI']; ?>" name="posthasteUrl" >
 
             <input id="submit" type="submit" value="Post it" />
 

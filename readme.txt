@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/posthaste/
 Tags: prologue, post
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.3
+Stable tag: 1.3.1
 
 Adds the post box from the Prologue theme (modified to include a Title field, Category dropdown and a  Save as Draft option) to any theme.
 
@@ -58,6 +58,9 @@ _Developers: if there's a better way to handle this, I'd be very appreciative if
 3. Choose which fields to show. In Settings -> Writing (2.7 only).
 
 == Changelog ==
+
+= 1.3.1 =
+* Bug fix: pages now redirect properly after posting with Draft checkbox disabled.
 
 = 1.3 =
 * You can now choose where you want the form to appear in Settings > Writing > Posthaste Settings. You can display the form on your Front Page (default), Front Page and all archive pages, all pages or only on the archive pages for a specific category.
