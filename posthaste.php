@@ -232,7 +232,7 @@ function posthasteForm() {
                     'name' => 'catsdd',
                     'orderby' => 'name',
                     'class' => 'catSelection',
-                    'heirarchical' => 1,
+                    'hierarchical' => 1,
                     'selected' => $catselect,
                     'tab_index' => 3
                     )
